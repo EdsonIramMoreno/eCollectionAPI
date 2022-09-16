@@ -45,7 +45,7 @@ namespace API.Application
             }
         }
 
-        public async Task<returnItemPhotoDTO> getAllItemPhotos(int itemId)
+        public async Task<List<ItemPhotoDisplayDTO>> getAllItemPhotos(int itemId)
         {
             try
             {
@@ -62,75 +62,32 @@ namespace API.Application
 
 
                 // 3 Return "returnCategoryDTO"
-                if (photos.Count <= 0)
-                    return new returnItemPhotoDTO
-                    {
-                        status = 404,
-                        response = "ItemPhotos was NOT found.",
-                        errors = null,
-                        itemPhotos = null
-                    };
-
-                return new returnItemPhotoDTO
-                {
-                    status = 200,
-                    response = "ItemPhotos was found.",
-                    errors = null,
-                    itemPhotos = photos
-                };
+                return photos;
             }
             catch (Exception ex)
             {
-                return new returnItemPhotoDTO
-                {
-                    status = 500,
-                    response = "One or more errors happend in the search.",
-                    errors = new List<ErrorDTO> { new ErrorDTO { message = ex.Message, stackTrace = ex.StackTrace } },
-                    itemPhotos = null
-                };
+                throw new Exception("Exception: " + ex.Message + " " + ex.StackTrace);
             }
         }
 
-        public async Task<returnItemPhotoDTO> getItemPhotosById(int itemId, int photoId)
+        public async Task<ItemPhotoDisplayDTO> getItemPhotosById(int itemId, int photoId)
         {
             try
             {
                 // 1 Get CategoryModList
                 var photoMods = await photoRepository.getItemPhotosById(itemId, photoId);
 
-                List<ItemPhotoDisplayDTO> photos = new List<ItemPhotoDisplayDTO>();
+                var photo = new ItemPhotoDisplayDTO();
 
                 // 2 Map MOD to DTO
-                    photos.Add(ItemPhotoMapper.mapMODtoDTO(photoMods));
+                    photo = ItemPhotoMapper.mapMODtoDTO(photoMods);
 
 
-                // 3 Return "returnCategoryDTO"
-                if (photos.Count <= 0)
-                    return new returnItemPhotoDTO
-                    {
-                        status = 404,
-                        response = "ItemPhotos was NOT found.",
-                        errors = null,
-                        itemPhotos = null
-                    };
-
-                return new returnItemPhotoDTO
-                {
-                    status = 200,
-                    response = "ItemPhotos was found.",
-                    errors = null,
-                    itemPhotos = photos
-                };
+                return photo;
             }
             catch (Exception ex)
             {
-                return new returnItemPhotoDTO
-                {
-                    status = 500,
-                    response = "One or more errors happend in the search.",
-                    errors = new List<ErrorDTO> { new ErrorDTO { message = ex.Message, stackTrace = ex.StackTrace } },
-                    itemPhotos = null
-                };
+                throw new Exception("Exception: " + ex.Message + " " + ex.StackTrace);
             }
         }
 

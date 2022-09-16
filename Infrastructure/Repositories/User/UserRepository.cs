@@ -58,7 +58,7 @@ namespace Infrastructure.Repositories.User
             //saving the token in a session variable
             if (token != null)
             {
-                var query = "sp_userInfo_Login_get";
+                var query = "sp_userInfo_get";
 
                 var parameters = new DynamicParameters();
                 parameters.Add("@userId", fbAuthLink.User.LocalId, DbType.String);

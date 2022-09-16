@@ -4,7 +4,7 @@ namespace Core.Interfaces.Category
 {
     public interface ICategoryServices
     {
-        public Task<returnCategoryDTO> getAllCategories();
-        public Task<returnCategoryDTO> getCategoryById(int categoryId);
+        public Task<List<CategoryDTO>> getAllCategories();
+        public Task<List<CategoryDTO>> getCategoryById(int categoryId);
     }
 }

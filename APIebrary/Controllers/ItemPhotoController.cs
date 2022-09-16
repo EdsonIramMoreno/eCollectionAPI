@@ -29,19 +29,35 @@ namespace API.Controllers
         }
 
         [HttpGet("{itemId:int}")]
-        public async Task<ActionResult<returnItemPhotoDTO>> getAllItemPhotos(int itemId)
+        public async Task<ActionResult> getAllItemPhotos(int itemId)
         {
-            returnItemPhotoDTO response = await services.getAllItemPhotos(itemId);
+            var response = await services.getAllItemPhotos(itemId);
 
-            return StatusCode(response.status, response);
+            if (response == null || response.Count < 1)
+            {
+                return StatusCode(404, new ErrorDTO
+                {
+                    message = "The category catalog was not found."
+                });
+            }
+
+            return StatusCode(200, response);
         }
 
         [HttpGet("{itemId:int}/{photoId:int}")]
-        public async Task<ActionResult<returnItemPhotoDTO>> getItemPhotosById(int itemId, int photoId)
+        public async Task<ActionResult> getItemPhotosById(int itemId, int photoId)
         {
-            returnItemPhotoDTO response = await services.getItemPhotosById(itemId,photoId);
+            var response = await services.getItemPhotosById(itemId,photoId);
 
-            return StatusCode(response.status, response);
+            if (response == null)
+            {
+                return StatusCode(404, new ErrorDTO
+                {
+                    message = "The category catalog was not found."
+                });
+            }
+
+            return StatusCode(200, response);
         }
 
         [HttpDelete("{itemPhotoId:int}")]

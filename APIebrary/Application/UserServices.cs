@@ -14,7 +14,7 @@ namespace API.Application
             this.userRepository = userRepository;
         }
 
-        public async Task<returnUserDTO> SignIn(UserSignInDTO userMod)
+        public async Task<UserInfoDTO> SignIn(UserSignInDTO userMod)
         {
             try
             {
@@ -22,28 +22,16 @@ namespace API.Application
                 UserInfoDTO userInfo = await userRepository.SignIn(userMod);
 
                 // 2.0 Retornar Listado
-                return new returnUserDTO
-                {
-                    status = 200,
-                    response = "The user has been created succesfully",
-                    errors = null,
-                    userInfo = userInfo
-                };
+                return userInfo;
             }
             catch (Exception ex)
             {
-                return new returnUserDTO
-                {
-                    status = 500,
-                    response = "One or more mistakes where found in the consult",
-                    errors = new List<ErrorDTO> { new ErrorDTO { message = ex.Message, stackTrace = ex.StackTrace } },
-                    userInfo = null
-                };
+                throw new Exception("Exception: " + ex.Message + " " + ex.StackTrace);
             }
         }
             
 
-        public async Task<returnUserDTO> LoginIn(UserLoginDTO loginDTO)
+        public async Task<UserInfoDTO> LoginIn(UserLoginDTO loginDTO)
         {
             try
             {
@@ -51,28 +39,15 @@ namespace API.Application
                 UserInfoDTO userInfo = await userRepository.LoginIn(loginDTO);
 
                 // 2.0 Retornar Listado
-                return new returnUserDTO
-                {
-                    status = 200,
-                    response = "The user has logged in succesfully",
-                     
-                    errors = null,
-                    userInfo = userInfo
-                };
+                return userInfo;
             }
             catch (Exception ex)
             {
-                return new returnUserDTO
-                {
-                    status = 500,
-                    response = "One or more mistakes where found in the consult",
-                    errors = new List<ErrorDTO> { new ErrorDTO { message = ex.Message, stackTrace = ex.StackTrace } },
-                    userInfo = null
-                };
+                throw new Exception("Exception: " + ex.Message + " " + ex.StackTrace);
             }
         }
 
-        public async Task<returnUserDTO> UserUpdateInfo(UserInfoDTO user)
+        public async Task<UserInfoDTO> UserUpdateInfo(UserInfoDTO user)
         {
             try
             {
@@ -80,28 +55,15 @@ namespace API.Application
                 UserInfoDTO userInfo = await userRepository.UserUpdateInfo(user);
 
                 // 2.0 Retornar Listado
-                return new returnUserDTO
-                {
-                    status = 200,
-                    response = "The user has been updated succesfully",
-
-                    errors = null,
-                    userInfo = userInfo
-                };
+                return userInfo;
             }
             catch (Exception ex)
             {
-                return new returnUserDTO
-                {
-                    status = 500,
-                    response = "One or more mistakes where found in the consult",
-                    errors = new List<ErrorDTO> { new ErrorDTO { message = ex.Message, stackTrace = ex.StackTrace } },
-                    userInfo = null
-                };
+                throw new Exception("Exception: " + ex.Message + " " + ex.StackTrace);
             }
         }
 
-        public async Task<returnUserDTO> UserUpdatePhotoInfo(UserUpdatePhotoDTO userUpdate)
+        public async Task<UserInfoDTO> UserUpdatePhotoInfo(UserUpdatePhotoDTO userUpdate)
         {
             try
             {
@@ -109,24 +71,11 @@ namespace API.Application
                 UserInfoDTO userInfo = await userRepository.UserUpdatePhotoInfo(userUpdate);
 
                 // 2.0 Retornar Listado
-                return new returnUserDTO
-                {
-                    status = 200,
-                    response = "The user photo has been updated succesfully",
-
-                    errors = null,
-                    userInfo = userInfo
-                };
+                return userInfo;
             }
             catch (Exception ex)
             {
-                return new returnUserDTO
-                {
-                    status = 500,
-                    response = "One or more mistakes where found in the consult",
-                    errors = new List<ErrorDTO> { new ErrorDTO { message = ex.Message, stackTrace = ex.StackTrace } },
-                    userInfo = null
-                };
+                throw new Exception("Exception: " + ex.Message + " " + ex.StackTrace);
             }
         }
 

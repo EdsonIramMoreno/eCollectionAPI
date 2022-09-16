@@ -32,7 +32,7 @@ namespace Infrastructure.Repositories.Item
             await connection.QueryAsync(query, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<List<itemCompleteInfoDTO>> getItemById(int collectionId, int itemId)
+        public async Task<itemCompleteInfoDTO> getItemById(int collectionId, int itemId)
         {
             var query = "sp_itemInfo_get";
 
@@ -41,7 +41,7 @@ namespace Infrastructure.Repositories.Item
             parameters.Add("@itemId", itemId, DbType.Int32);
 
             using var connection = context.SQLConnection();
-            List<itemCompleteInfoDTO> itemComplete = (await connection.QueryAsync<itemCompleteInfoDTO>(query, parameters, commandType: CommandType.StoredProcedure)).ToList();
+            var itemComplete = (await connection.QuerySingleOrDefaultAsync<itemCompleteInfoDTO>(query, parameters, commandType: CommandType.StoredProcedure));
 
             return itemComplete;
         }
@@ -74,5 +74,6 @@ namespace Infrastructure.Repositories.Item
             using var connection = context.SQLConnection();
             await connection.QueryAsync(query, parameters, commandType: CommandType.StoredProcedure);
         }
+
     }
 }

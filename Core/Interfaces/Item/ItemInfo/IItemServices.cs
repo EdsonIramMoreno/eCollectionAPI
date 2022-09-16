@@ -7,7 +7,7 @@ namespace Core.Interfaces.Item.ItemInfo
     {
         public Task<ResponseDTO> CreateItem(itemInsertInfoDTO itemInfo);
         public Task<ResponseDTO> UpdateItem(itemUpdateInfoDTO itemInfo);
-        public Task<returnItemInfoDisplayDTO> getAllItemsByCollectionId(int collectionId);
-        public Task<returnItemCompleteInfoDTO> getItemById(int collectionId,int itemId);
+        public Task<List<itemDisplayInfoDTO>> getAllItemsByCollectionId(int collectionId);
+        public Task<itemCompleteInfoDTO> getItemById(int collectionId,int itemId);
     }
 }

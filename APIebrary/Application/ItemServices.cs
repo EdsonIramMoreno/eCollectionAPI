@@ -45,7 +45,7 @@ namespace API.Application
             }
         }
 
-        public async Task<returnItemCompleteInfoDTO> getItemById(int collectionId, int itemId)
+        public async Task<itemCompleteInfoDTO> getItemById(int collectionId, int itemId)
         {
             try
             {
@@ -53,36 +53,15 @@ namespace API.Application
                 var itemDisplay = await itemRepository.getItemById(collectionId, itemId);
 
                 // 2 Retornar Listado
-                if (itemDisplay.Count <= 0)
-                    return new returnItemCompleteInfoDTO
-                    {
-                        status = 404,
-                        response = "CategoryList was NOT found.",
-                        errors = null,
-                        itemInfo = null
-                    };
-
-                return new returnItemCompleteInfoDTO
-                {
-                    status = 200,
-                    response = "CategoryList was found.",
-                    errors = null,
-                    itemInfo = itemDisplay
-                };
+                return itemDisplay;
             }
             catch (Exception ex)
             {
-                return new returnItemCompleteInfoDTO
-                {
-                    status = 500,
-                    response = "One or more mistakes where found in the consult",
-                    errors = new List<ErrorDTO> { new ErrorDTO { message = ex.Message, stackTrace = ex.StackTrace } },
-                    itemInfo = null
-                };
+                throw new Exception("Exception: " + ex.Message + " " + ex.StackTrace);
             }
         }
 
-        public async Task<returnItemInfoDisplayDTO> getAllItemsByCollectionId(int collectionId)
+        public async Task<List<itemDisplayInfoDTO>> getAllItemsByCollectionId(int collectionId)
         {
             try
             {
@@ -91,32 +70,11 @@ namespace API.Application
 
                 // 2 Retornar Listado
 
-                if (itemDisplay.Count <= 0)
-                    return new returnItemInfoDisplayDTO
-                    {
-                        status = 404,
-                        response = "CategoryList was NOT found.",
-                        errors = null,
-                        items = null
-                    };
-
-                return new returnItemInfoDisplayDTO
-                {
-                    status = 200,
-                    response = "CategoryList was found.",
-                    errors = null,
-                    items = itemDisplay
-                };
+                return itemDisplay;
             }
             catch (Exception ex)
             {
-                return new returnItemInfoDisplayDTO
-                {
-                    status = 500,
-                    response = "One or more mistakes where found in the consult",
-                    errors = new List<ErrorDTO> { new ErrorDTO { message = ex.Message, stackTrace = ex.StackTrace } },
-                    items = null
-                };
+                throw new Exception("Exception: " + ex.Message + " " + ex.StackTrace);
             }
         }
 

@@ -18,35 +18,67 @@ namespace API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<returnUserDTO>> Login(UserLoginDTO loginDTO)
+        public async Task<ActionResult> Login(UserLoginDTO loginDTO)
         {
-            returnUserDTO response = await services.LoginIn(loginDTO);
+            var response = await services.LoginIn(loginDTO);
 
-            return StatusCode(response.status, response);
+            if (response == null)
+            {
+                return StatusCode(404, new ErrorDTO
+                {
+                    message = "The category catalog was not found."
+                });
+            }
+
+            return StatusCode(200, response);
         }
 
         [HttpPost("signin")]
-        public async Task<ActionResult<returnUserDTO>> SignIn(UserSignInDTO userInfo)
+        public async Task<ActionResult> SignIn(UserSignInDTO userInfo)
         {
-            returnUserDTO response = await services.SignIn(userInfo);
+            var response = await services.SignIn(userInfo);
 
-            return StatusCode(response.status, response);
+            if (response == null)
+            {
+                return StatusCode(404, new ErrorDTO
+                {
+                    message = "The category catalog was not found."
+                });
+            }
+
+            return StatusCode(200, response);
         }
 
         [HttpPut("updateUser")]
-        public async Task<ActionResult<ResponseDTO>> UserUpdateInfo(UserInfoDTO user)
+        public async Task<ActionResult> UserUpdateInfo(UserInfoDTO user)
         {
-            returnUserDTO response = await services.UserUpdateInfo(user);
+            var response = await services.UserUpdateInfo(user);
 
-            return StatusCode(response.status, response);
+            if (response == null)
+            {
+                return StatusCode(404, new ErrorDTO
+                {
+                    message = "The category catalog was not found."
+                });
+            }
+
+            return StatusCode(200, response);
         }
 
         [HttpPut("updatePhoto")]
-        public async Task<ActionResult<ResponseDTO>> UserUpdatePhotoInfo(UserUpdatePhotoDTO userPhoto)
+        public async Task<ActionResult> UserUpdatePhotoInfo(UserUpdatePhotoDTO userPhoto)
         {
-            returnUserDTO response = await services.UserUpdatePhotoInfo(userPhoto);
+            var response = await services.UserUpdatePhotoInfo(userPhoto);
 
-            return StatusCode(response.status, response);
+            if (response == null)
+            {
+                return StatusCode(404, new ErrorDTO
+                {
+                    message = "The category catalog was not found."
+                });
+            }
+
+            return StatusCode(200, response);
         }
     }
 }

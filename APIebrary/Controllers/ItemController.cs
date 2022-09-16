@@ -36,19 +36,35 @@ namespace API.Controllers
 
         
         [HttpGet("{collectionId:int}")]
-        public async Task<ActionResult<returnItemInfoDisplayDTO>> getAllItemsByCollectionId(int collectionId)
+        public async Task<ActionResult> getAllItemsByCollectionId(int collectionId)
         {
-            returnItemInfoDisplayDTO response = await services.getAllItemsByCollectionId(collectionId);
+            var response = await services.getAllItemsByCollectionId(collectionId);
+            
+            if (response == null || response.Count < 1)
+            {
+                return StatusCode(404, new ErrorDTO
+                {
+                    message = "The items in the collection: " + collectionId.ToString() + " were not found"
+                });
+            }
 
-            return StatusCode(response.status, response);
+            return StatusCode(200, response);
         }
 
         [HttpGet("{collectionId:int}/{itemId:int}")]
-        public async Task<ActionResult<returnItemCompleteInfoDTO>> getAllItemsByCollectionId(int collectionId, int itemId)
+        public async Task<ActionResult> getAllItemsByCollectionId(int collectionId, int itemId)
         {
-            returnItemCompleteInfoDTO response = await services.getItemById(collectionId, itemId);
+            var response = await services.getItemById(collectionId, itemId);
+            
+            if (response == null)
+            {
+                return StatusCode(404, new ErrorDTO
+                {
+                    message = "The items with th id: " + itemId.ToString() + " was not found"
+                });
+            }
 
-            return StatusCode(response.status, response);
+            return StatusCode(200, response);
         }
     }
 }

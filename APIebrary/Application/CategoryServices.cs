@@ -14,7 +14,7 @@ namespace API.Application
             this.categoryRepository = categoryRepository;
         }
 
-        public async Task<returnCategoryDTO> getAllCategories()
+        public async Task<List<CategoryDTO>> getAllCategories()
         {
             try
             {
@@ -24,43 +24,20 @@ namespace API.Application
                 List<CategoryDTO> categories = new List<CategoryDTO>();
 
                 // 2 Map MOD to DTO
-                foreach(var category in categoriesMod)
+                foreach (var category in categoriesMod)
                 {
                     categories.Add(CategoryMapper.mapMODtoDTO(category));
                 }
 
-
-                // 3 Return "returnCategoryDTO"
-                if(categories.Count <= 0)
-                    return new returnCategoryDTO
-                    {
-                        status = 404,
-                        response = "CategoryList was NOT found.",
-                        errors = null,
-                        categories = null
-                    };
-
-                return new returnCategoryDTO
-                {
-                    status = 200,
-                    response = "CategoryList was found.",
-                    errors = null,
-                    categories = categories
-                };
+                return categories;
             }
             catch (Exception ex)
             {
-                return new returnCategoryDTO
-                {
-                    status = 500,
-                    response = "One or more errors happend in the search.",
-                    errors = new List<ErrorDTO> { new ErrorDTO { message = ex.Message, stackTrace = ex.StackTrace } },
-                    categories = null
-                };
+                throw new Exception("Exception: " + ex.Message + " " + ex.StackTrace);
             }
         }
 
-        public async Task<returnCategoryDTO> getCategoryById(int categoryId)
+        public async Task<List<CategoryDTO>> getCategoryById(int categoryId)
         {
             try
             {
@@ -72,35 +49,11 @@ namespace API.Application
                 // 2 Map MOD to DTO
                     categories.Add(CategoryMapper.mapMODtoDTO(categoryMod));
                 
-
-
-                // 3 Return "returnCategoryDTO"
-                if (categories.Count <= 0)
-                    return new returnCategoryDTO
-                    {
-                        status = 404,
-                        response = "CategoryList was NOT found.",
-                        errors = null,
-                        categories = null
-                    };
-
-                return new returnCategoryDTO
-                {
-                    status = 200,
-                    response = "CategoryList with ID: " + categoryId.ToString() + " was found.",
-                    errors = null,
-                    categories = categories
-                };
+                return categories;
             }
             catch (Exception ex)
             {
-                return new returnCategoryDTO
-                {
-                    status = 500,
-                    response = "One or more errors happend in the search.",
-                    errors = new List<ErrorDTO> { new ErrorDTO { message = ex.Message, stackTrace = ex.StackTrace } },
-                    categories = null
-                };
+                throw new Exception("Exception: " + ex.Message + " " + ex.StackTrace);
             }
         }
     }
