@@ -22,7 +22,7 @@ namespace Infrastructure.Repositories.Category
 
             using var connection = context.SQLConnection();
             List<CategoryMod> category = (await connection.QueryAsync<CategoryMod>(query,null, commandType: CommandType.StoredProcedure)).ToList();
-
+            
             return category;
         }
 

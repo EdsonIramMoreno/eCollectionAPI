@@ -1,7 +1,6 @@
 ﻿using Core.DTO;
-using Core.DTO.Category;
-using Core.DTO.Item.ItemInfo;
 using Core.Interfaces.Category;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Contorllers
@@ -38,7 +37,7 @@ namespace API.Contorllers
         {
             var response = await services.getCategoryById(categoryId);
 
-            if (response == null || response.Count < 1)
+            if (response == null)
             {
                 return StatusCode(404, new ErrorDTO
                 {

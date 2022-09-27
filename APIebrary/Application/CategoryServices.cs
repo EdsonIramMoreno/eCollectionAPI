@@ -37,17 +37,17 @@ namespace API.Application
             }
         }
 
-        public async Task<List<CategoryDTO>> getCategoryById(int categoryId)
+        public async Task<CategoryDTO> getCategoryById(int categoryId)
         {
             try
             {
                 // 1 Get CategoryModList
                 var categoryMod = await categoryRepository.getCategoryById(categoryId);
 
-                List<CategoryDTO> categories = new List<CategoryDTO>();
+                var categories = new CategoryDTO();
 
                 // 2 Map MOD to DTO
-                    categories.Add(CategoryMapper.mapMODtoDTO(categoryMod));
+                    categories = CategoryMapper.mapMODtoDTO(categoryMod);
                 
                 return categories;
             }

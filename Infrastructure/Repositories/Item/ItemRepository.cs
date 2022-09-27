@@ -1,5 +1,6 @@
 ﻿using Core.DTO.Item.ItemInfo;
 using Core.Entities.CategoryList;
+using Core.Entities.Item.ItemPhoto;
 using Core.Interfaces.Item.ItemInfo;
 using Dapper;
 using Infrastructure.Data;
@@ -75,5 +76,15 @@ namespace Infrastructure.Repositories.Item
             await connection.QueryAsync(query, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task DeleteItem(int itemId)
+        {
+            var query = "sp_itemInfo_Delete";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@itemId", itemId, DbType.String);
+
+            using var connection = context.SQLConnection();
+            await connection.QueryAsync(query, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

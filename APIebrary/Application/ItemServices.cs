@@ -1,6 +1,7 @@
 ﻿using Core.DTO;
 using Core.DTO.Category;
 using Core.DTO.Item.ItemInfo;
+using Core.Entities.Item.ItemPhoto;
 using Core.Interfaces.Item.ItemInfo;
 using Core.Mappers;
 using Infrastructure.Repositories.Category;
@@ -102,6 +103,34 @@ namespace API.Application
                     response = "One or more mistakes where found in the consult",
                     errors = new List<ErrorDTO> { new ErrorDTO { message = ex.Message, stackTrace = ex.StackTrace } },
                     entityName = "ItemInfo"
+                };
+            }
+        }
+
+        public async Task<ResponseDTO> DeleteItem(int itemId)
+        {
+            try
+            {
+                // 1.0 Obtener información del Usuario
+                await itemRepository.DeleteItem(itemId);
+
+                // 2.0 Retornar Listado
+                return new ResponseDTO
+                {
+                    status = 200,
+                    response = "The item and its photo have been deleted succesfully",
+                    errors = null,
+                    entityName = "ItemPhoto"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseDTO
+                {
+                    status = 500,
+                    response = "One or more mistakes where found in the consult",
+                    errors = new List<ErrorDTO> { new ErrorDTO { message = ex.Message, stackTrace = ex.StackTrace } },
+                    entityName = "ItemPhoto"
                 };
             }
         }

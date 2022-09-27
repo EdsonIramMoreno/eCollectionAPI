@@ -66,5 +66,13 @@ namespace API.Controllers
 
             return StatusCode(200, response);
         }
+
+        [HttpDelete("delete/{itemId:int}")]
+        public async Task<ActionResult<ResponseDTO>> DeletePhoto(int itemId)
+        {
+            ResponseDTO response = await services.DeleteItem(itemId);
+
+            return StatusCode(response.status, response);
+        }
     }
 }
