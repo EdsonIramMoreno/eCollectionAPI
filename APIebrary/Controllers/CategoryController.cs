@@ -17,19 +17,25 @@ namespace API.Contorllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<returnCategoryDTO>> getAllCategories()
+        public async Task<ActionResult> getAllCategories()
         {
-            returnCategoryDTO response = await services.getAllCategories();
+            var response = await services.getAllCategories();
 
-            return StatusCode(response.status, response);
+            if (response == null || response.Count <= 0)
+                return StatusCode(404, "Consult not found");
+
+            return StatusCode(200, response);
         }
 
         [HttpGet("{categoryId:int}")]
-        public async Task<ActionResult<returnItemInfoDisplayDTO>> getCategoryById(int categoryId)
+        public async Task<ActionResult> getCategoryById(int categoryId)
         {
-            returnCategoryDTO response = await services.getCategoryById(categoryId);
+            var response = await services.getCategoryById(categoryId);
 
-            return StatusCode(response.status, response);
+            if (response == null)
+                return StatusCode(404, "Consult not found");
+
+            return StatusCode(200, response);
         }
     }
 }
