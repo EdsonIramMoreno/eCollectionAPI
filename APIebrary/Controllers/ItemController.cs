@@ -19,7 +19,7 @@ namespace API.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult<ResponseDTO>> CreateItem(itemInsertInfoDTO itemInsertInfo)
+        public async Task<ActionResult<ResponseDTO>> CreateItem([FromForm] itemInsertInfoDTO itemInsertInfo)
         {
             ResponseDTO response = await services.CreateItem(itemInsertInfo);
 
@@ -27,7 +27,7 @@ namespace API.Controllers
         }
 
         [HttpPut("update")]
-        public async Task<ActionResult<ResponseDTO>> UpdateItem(itemUpdateInfoDTO itemtInfo)
+        public async Task<ActionResult<ResponseDTO>> UpdateItem([FromForm] itemUpdateInfoDTO itemtInfo)
         {
             ResponseDTO response = await services.UpdateItem(itemtInfo);
 

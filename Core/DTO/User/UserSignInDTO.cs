@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.DTO.User
 {
@@ -19,14 +20,13 @@ namespace Core.DTO.User
         public string userEmail { get; set; }
 
 
-        [Required(ErrorMessage = "{0} is a required field.")]
-        public string userPhoto { get; set; }
-
 
         [Required]
         [StringLength(20, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 8)]
         public string pwd { get; set; }
 
+        [Required(ErrorMessage = "{0} is a required field.")]
+        public IFormFile userPhoto { get; set; }
 
         [Required(ErrorMessage = "{0} is a required field.")]
         public int fk_loginTypeId { get; set; }

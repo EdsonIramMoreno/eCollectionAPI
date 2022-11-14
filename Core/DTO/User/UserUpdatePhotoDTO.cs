@@ -1,8 +1,10 @@
-﻿namespace Core.DTO.User
+﻿using Microsoft.AspNetCore.Http;
+
+namespace Core.DTO.User
 {
     public class UserUpdatePhotoDTO
     {
         public string userId { get; set; }
-        public string userPhoto { get; set; }
+        public IFormFile userPhoto { get; set; }
     }
 }

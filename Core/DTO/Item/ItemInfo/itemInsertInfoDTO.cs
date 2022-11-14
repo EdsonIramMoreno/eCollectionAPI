@@ -1,4 +1,6 @@
-﻿namespace Core.DTO.Item.ItemInfo
+﻿using Microsoft.AspNetCore.Http;
+
+namespace Core.DTO.Item.ItemInfo
 {
     public class itemInsertInfoDTO
     {
@@ -6,7 +8,7 @@
         public string itemDescription { get; set; }
         public decimal marketPrice { get; set; }
         public decimal acquiredPrice { get; set; }
-        public string itemCover { get; set; }
+        public IFormFile itemCover { get; set; }
         public int fk_collectionId { get; set; }
     }
 }

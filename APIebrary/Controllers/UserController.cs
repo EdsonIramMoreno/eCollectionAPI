@@ -34,7 +34,7 @@ namespace API.Controllers
         }
 
         [HttpPost("signin")]
-        public async Task<ActionResult> SignIn(UserSignInDTO userInfo)
+        public async Task<ActionResult> SignIn([FromForm] UserSignInDTO userInfo)
         {
             var response = await services.SignIn(userInfo);
 
@@ -66,7 +66,7 @@ namespace API.Controllers
         }
 
         [HttpPut("updatePhoto")]
-        public async Task<ActionResult> UserUpdatePhotoInfo(UserUpdatePhotoDTO userPhoto)
+        public async Task<ActionResult> UserUpdatePhotoInfo([FromForm] UserUpdatePhotoDTO userPhoto)
         {
             var response = await services.UserUpdatePhotoInfo(userPhoto);
 

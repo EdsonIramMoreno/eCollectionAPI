@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/e-collection-server/databases/eCollection",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:DefaultConnection",
+      "dynamicId": null
+    },
+    "apis2": {
+      "apiEndpoint": "https://ecollection.azure-api.net/",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/eCollection/apis/API",
+      "type": "apis.azure"
+    }
+  }
+}

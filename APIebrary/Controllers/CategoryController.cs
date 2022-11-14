@@ -1,5 +1,6 @@
 ﻿using Core.DTO;
 using Core.Interfaces.Category;
+using Core.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +31,12 @@ namespace API.Contorllers
             }
 
             return StatusCode(200, response);
+        }
+
+        [HttpGet("hola")]
+        public async Task<ActionResult> hola()
+        {
+            return StatusCode(200, "hola");
         }
 
         [HttpGet("{categoryId:int}")]

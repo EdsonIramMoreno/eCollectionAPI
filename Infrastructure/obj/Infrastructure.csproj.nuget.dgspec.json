@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\edson\\source\\repos\\API\\Infrastructure\\Infrastructure.csproj": {}
+    "C:\\Users\\edson\\source\\repos\\eCollectionAPI\\Infrastructure\\Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\edson\\source\\repos\\API\\Core\\Core.csproj": {
+    "C:\\Users\\edson\\source\\repos\\eCollectionAPI\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\edson\\source\\repos\\API\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\edson\\source\\repos\\eCollectionAPI\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\edson\\source\\repos\\API\\Core\\Core.csproj",
+        "projectPath": "C:\\Users\\edson\\source\\repos\\eCollectionAPI\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\edson\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\edson\\source\\repos\\API\\Core\\obj\\",
+        "outputPath": "C:\\Users\\edson\\source\\repos\\eCollectionAPI\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\edson\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,6 +39,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -59,14 +65,14 @@
         }
       }
     },
-    "C:\\Users\\edson\\source\\repos\\API\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\edson\\source\\repos\\eCollectionAPI\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\edson\\source\\repos\\API\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\edson\\source\\repos\\eCollectionAPI\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\edson\\source\\repos\\API\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "C:\\Users\\edson\\source\\repos\\eCollectionAPI\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\edson\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\edson\\source\\repos\\API\\Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\edson\\source\\repos\\eCollectionAPI\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\edson\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -83,8 +89,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\edson\\source\\repos\\API\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\edson\\source\\repos\\API\\Core\\Core.csproj"
+              "C:\\Users\\edson\\source\\repos\\eCollectionAPI\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\edson\\source\\repos\\eCollectionAPI\\Core\\Core.csproj"
               }
             }
           }
@@ -106,6 +112,10 @@
             "Firebase.Auth": {
               "target": "Package",
               "version": "[1.0.0, )"
+            },
+            "FirebaseStorage.net": {
+              "target": "Package",
+              "version": "[1.0.3, )"
             },
             "Microsoft.AspNetCore.Session": {
               "target": "Package",

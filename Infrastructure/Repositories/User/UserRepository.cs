@@ -1,5 +1,6 @@
 ﻿using Core.DTO.User;
 using Core.Interfaces.User;
+using Core.Utilities;
 using Dapper;
 using Firebase.Auth;
 using Infrastructure.Data;
@@ -30,6 +31,10 @@ namespace Infrastructure.Repositories.User
             //saving the token in a session variable
             if (token != null)
             {
+                var img = userMod.userPhoto.OpenReadStream();
+                var path = "userInfo/" + fbAuthLink.User.LocalId;
+                string imageUrl = await ImageUtility.uploadImage(context.FireBaseKey(), context.FireBaseBucket(), context.FireBaseUser(), context.FireBasePassword(), path, img);
+                
                 var query = "sp_userInfo_Insert";
 
                 var parameters = new DynamicParameters();
@@ -37,7 +42,7 @@ namespace Infrastructure.Repositories.User
                 parameters.Add("@userName", userMod.userName, DbType.String);
                 parameters.Add("@userLastName", userMod.userLastName, DbType.String);
                 parameters.Add("@userEmail", userMod.userEmail, DbType.String);
-                parameters.Add("@userPhoto", userMod.userPhoto, DbType.String);
+                parameters.Add("@userPhoto", imageUrl, DbType.String);
                 parameters.Add("@fk_loginTypeId", userMod.fk_loginTypeId, DbType.Int32);
 
                 using var connection = context.SQLConnection();
@@ -89,9 +94,13 @@ namespace Infrastructure.Repositories.User
         {
             var query = "sp_userInfo_Photo_Update";
 
+            var img = userUpdate.userPhoto.OpenReadStream();
+            var path = "userInfo/" + userUpdate.userId;
+            string imageUrl = await ImageUtility.uploadImage(context.FireBaseKey(), context.FireBaseBucket(), context.FireBaseUser(), context.FireBasePassword(), path, img);
+
             var parameters = new DynamicParameters();
             parameters.Add("@userId", userUpdate.userId, DbType.String);
-            parameters.Add("@userPhoto", userUpdate.userPhoto, DbType.String);
+            parameters.Add("@userPhoto", imageUrl, DbType.String);
 
             using var connection = context.SQLConnection();
             UserInfoDTO UserInfo = await connection.QueryFirstOrDefaultAsync<UserInfoDTO>(query, parameters, commandType: CommandType.StoredProcedure);
