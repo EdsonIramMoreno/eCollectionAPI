@@ -18,7 +18,7 @@ namespace API.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult<ResponseDTO>> CreateCollection([FromForm] CollectionInfoInsertDTO collectionInfo)
+        public async Task<ActionResult<ResponseDTO>> CreateCollection(CollectionInfoInsertDTO collectionInfo)
         {
             ResponseDTO response = await services.CreateCollection(collectionInfo);
 
@@ -58,7 +58,7 @@ namespace API.Controllers
         }
 
         [HttpPut("update")]
-        public async Task<ActionResult> CollectionInfoUpdate([FromForm] CollectionInfoUpdateDTO collection)
+        public async Task<ActionResult> CollectionInfoUpdate(CollectionInfoUpdateDTO collection)
         {
             ResponseDTO response = await services.CollectionInfoUpdate(collection);
 

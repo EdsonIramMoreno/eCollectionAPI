@@ -92,9 +92,8 @@ namespace Infrastructure.Repositories.Item
 
             var ids = await this.getIds(itemPhoto.itemPhotoId);
 
-            var img = itemPhoto.itemPhoto.OpenReadStream();
             var path = "Collections/Collection_" + ids.collectionId + "/Items_" + ids.itemId + "/Photos_" + ids.itemId + "/" + ids.itemPhotoId;
-            string imageUrl = await ImageUtility.uploadImage(context.FireBaseKey(), context.FireBaseBucket(), context.FireBaseUser(), context.FireBasePassword(), path, img);
+            string imageUrl = await ImageUtility.uploadImage(context.FireBaseKey(), context.FireBaseBucket(), context.FireBaseUser(), context.FireBasePassword(), path, itemPhoto.itemPhoto);
 
             var parameters = new DynamicParameters();
             parameters.Add("@itemPhoto", imageUrl, DbType.String);

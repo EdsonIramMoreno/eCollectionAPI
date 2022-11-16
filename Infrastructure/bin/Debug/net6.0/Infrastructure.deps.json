@@ -1367,7 +1367,8 @@
       },
       "Core/1.0.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.Http.Features": "5.0.17"
+          "Microsoft.AspNetCore.Http.Features": "5.0.17",
+          "System.Drawing.Common": "5.0.0"
         },
         "runtime": {
           "Core.dll": {}

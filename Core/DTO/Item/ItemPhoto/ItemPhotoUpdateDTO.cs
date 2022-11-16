@@ -10,6 +10,6 @@ namespace Core.DTO.Item.ItemPhoto
     public class ItemPhotoUpdateDTO
     {
         public int itemPhotoId { get; set; }
-        public IFormFile itemPhoto { get; set; }
+        public string itemPhoto { get; set; }
     }
 }

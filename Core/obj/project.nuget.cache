@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "a7tRQLVM6uAskwNRrKNbIPiyDoK2UggnAhAqrhQdjvIJwKA1vZrMWaK1MZ64KH7lC2b2wTQsUtAIC34pUzHc1Q==",
+  "dgSpecHash": "wGrnnJwDtWAY3qchuVlHlH0RON6jai5cwdKoYn8v4LdB5ceDoQIcxitQh9I6BzyvKfKBuEcu3lbUp6JAcHcENQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\edson\\source\\repos\\eCollectionAPI\\Core\\Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\edson\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
     "C:\\Users\\edson\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
+    "C:\\Users\\edson\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\edson\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\edson\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512",
     "C:\\Users\\edson\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512"
   ],
   "logs": []

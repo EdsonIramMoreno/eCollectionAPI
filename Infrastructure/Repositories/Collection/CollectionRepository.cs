@@ -21,9 +21,8 @@ namespace Infrastructure.Repositories.Collection
         {
             var query = "sp_collectionInfo_Update";
 
-            var img = collection.collectionCover.OpenReadStream();
             var path = "Collections/Collection_" + collection.collectionId + "/" + collection.collectionId;
-            string imageUrl = await ImageUtility.uploadImage(context.FireBaseKey(), context.FireBaseBucket(), context.FireBaseUser(), context.FireBasePassword(), path, img);
+            string imageUrl = await ImageUtility.uploadImage(context.FireBaseKey(), context.FireBaseBucket(), context.FireBaseUser(), context.FireBasePassword(), path, collection.collectionCover);
 
 
             var parameters = new DynamicParameters();

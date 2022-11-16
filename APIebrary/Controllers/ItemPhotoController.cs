@@ -21,7 +21,7 @@ namespace API.Controllers
 
 
         [HttpPost("insert")]
-        public async Task<ActionResult<ResponseDTO>> InsertPhoto([FromForm] ItemPhotoInsertDTO itemPhoto)
+        public async Task<ActionResult<ResponseDTO>> InsertPhoto(ItemPhotoInsertDTO itemPhoto)
         {
             ResponseDTO response = await services.InsertPhoto(itemPhoto);
 

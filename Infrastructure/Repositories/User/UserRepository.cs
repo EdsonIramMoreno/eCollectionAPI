@@ -5,6 +5,11 @@ using Dapper;
 using Firebase.Auth;
 using Infrastructure.Data;
 using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Infrastructure.Repositories.User
 {
@@ -31,10 +36,9 @@ namespace Infrastructure.Repositories.User
             //saving the token in a session variable
             if (token != null)
             {
-                var img = userMod.userPhoto.OpenReadStream();
                 var path = "userInfo/" + fbAuthLink.User.LocalId;
-                string imageUrl = await ImageUtility.uploadImage(context.FireBaseKey(), context.FireBaseBucket(), context.FireBaseUser(), context.FireBasePassword(), path, img);
-                
+
+                string imageUrl = await ImageUtility.uploadImage(context.FireBaseKey(), context.FireBaseBucket(), context.FireBaseUser(), context.FireBasePassword(), path, userMod.userPhoto);
                 var query = "sp_userInfo_Insert";
 
                 var parameters = new DynamicParameters();
@@ -94,9 +98,10 @@ namespace Infrastructure.Repositories.User
         {
             var query = "sp_userInfo_Photo_Update";
 
-            var img = userUpdate.userPhoto.OpenReadStream();
             var path = "userInfo/" + userUpdate.userId;
-            string imageUrl = await ImageUtility.uploadImage(context.FireBaseKey(), context.FireBaseBucket(), context.FireBaseUser(), context.FireBasePassword(), path, img);
+                       
+
+            string imageUrl = await ImageUtility.uploadImage(context.FireBaseKey(), context.FireBaseBucket(), context.FireBaseUser(), context.FireBasePassword(), path, userUpdate.userPhoto);
 
             var parameters = new DynamicParameters();
             parameters.Add("@userId", userUpdate.userId, DbType.String);

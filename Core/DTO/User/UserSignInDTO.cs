@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 
 namespace Core.DTO.User
 {
@@ -26,7 +27,7 @@ namespace Core.DTO.User
         public string pwd { get; set; }
 
         [Required(ErrorMessage = "{0} is a required field.")]
-        public IFormFile userPhoto { get; set; }
+        public string userPhoto { get; set; }
 
         [Required(ErrorMessage = "{0} is a required field.")]
         public int fk_loginTypeId { get; set; }
