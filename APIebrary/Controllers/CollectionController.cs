@@ -18,11 +18,15 @@ namespace API.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult<ResponseDTO>> CreateCollection(CollectionInfoInsertDTO collectionInfo)
+        public async Task<ActionResult<int>> CreateCollection(CollectionInfoInsertDTO collectionInfo)
         {
-            ResponseDTO response = await services.CreateCollection(collectionInfo);
+            var response = await services.CreateCollection(collectionInfo);
 
-            return StatusCode(response.status, response);
+            if (response == 0)
+                return StatusCode(404, response);
+
+            return Ok(response); 
+
         }
 
         [HttpGet("userCollections/{fk_userId}")]
@@ -65,7 +69,7 @@ namespace API.Controllers
             return StatusCode(response.status, response);
         }
 
-        [HttpDelete("delete/{collectionId:int}")]
+        [HttpPost("delete/{collectionId:int}")]
         public async Task<ActionResult> DeleteCollection(int collectionId)
         {
             ResponseDTO response = await services.DeleteCollection(collectionId);

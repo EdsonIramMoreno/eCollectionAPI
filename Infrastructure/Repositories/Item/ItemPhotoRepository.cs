@@ -30,19 +30,6 @@ namespace Infrastructure.Repositories.Item
             await connection.QueryAsync(query, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<List<ItemPhotoMod>> getAllItemPhotos(int itemId)
-        {
-            var query = "sp_itemPhoto_get";
-
-            var parameters = new DynamicParameters();
-            parameters.Add("@itemId", itemId, DbType.Int32);
-
-            using var connection = context.SQLConnection();
-            List<ItemPhotoMod> category = (await connection.QueryAsync<ItemPhotoMod>(query, parameters, commandType: CommandType.StoredProcedure)).ToList();
-
-            return category;
-        }
-
         public async Task<ItemPhotoMod> getItemPhotosById(int itemId, int photoId)
         {
             var query = "sp_itemPhoto_get";

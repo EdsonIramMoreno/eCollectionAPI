@@ -46,12 +46,12 @@ namespace API.Application
             }
         }
 
-        public async Task<itemCompleteInfoDTO> getItemById(int collectionId, int itemId)
+        public async Task<itemCompleteInfoDTO> getItemById(int itemId)
         {
             try
             {
                 // 1 Get CategoryModList
-                var itemDisplay = await itemRepository.getItemById(collectionId, itemId);
+                var itemDisplay = await itemRepository.getItemById(itemId);
 
                 // 2 Retornar Listado
                 return itemDisplay;

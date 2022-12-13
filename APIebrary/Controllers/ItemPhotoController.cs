@@ -28,22 +28,6 @@ namespace API.Controllers
             return StatusCode(response.status, response);
         }
 
-        [HttpGet("{itemId:int}")]
-        public async Task<ActionResult> getAllItemPhotos(int itemId)
-        {
-            var response = await services.getAllItemPhotos(itemId);
-
-            if (response == null || response.Count < 1)
-            {
-                return StatusCode(404, new ErrorDTO
-                {
-                    message = "The category catalog was not found."
-                });
-            }
-
-            return StatusCode(200, response);
-        }
-
         [HttpGet("{itemId:int}/{photoId:int}")]
         public async Task<ActionResult> getItemPhotosById(int itemId, int photoId)
         {
@@ -60,7 +44,7 @@ namespace API.Controllers
             return StatusCode(200, response);
         }
 
-        [HttpDelete("{itemPhotoId:int}")]
+        [HttpPost("{itemPhotoId:int}")]
         public async Task<ActionResult<ResponseDTO>> DeletePhoto(int itemPhotoId)
         {
             ResponseDTO response = await services.DeletePhoto(itemPhotoId);

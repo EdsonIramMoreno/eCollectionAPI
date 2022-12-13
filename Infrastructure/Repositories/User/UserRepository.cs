@@ -37,8 +37,8 @@ namespace Infrastructure.Repositories.User
             if (token != null)
             {
                 var path = "userInfo/" + fbAuthLink.User.LocalId;
-
                 string imageUrl = await ImageUtility.uploadImage(context.FireBaseKey(), context.FireBaseBucket(), context.FireBaseUser(), context.FireBasePassword(), path, userMod.userPhoto);
+                
                 var query = "sp_userInfo_Insert";
 
                 var parameters = new DynamicParameters();
@@ -94,14 +94,14 @@ namespace Infrastructure.Repositories.User
             UserInfoDTO UserInfo = await connection.QueryFirstOrDefaultAsync<UserInfoDTO>(query, parameters, commandType: CommandType.StoredProcedure);
             return UserInfo;
         }
+
         public async Task<UserInfoDTO> UserUpdatePhotoInfo(UserUpdatePhotoDTO userUpdate)
         {
-            var query = "sp_userInfo_Photo_Update";
 
-            var path = "userInfo/" + userUpdate.userId;
-                       
-
+            var path = "userInfo/" + userUpdate.userId;          
             string imageUrl = await ImageUtility.uploadImage(context.FireBaseKey(), context.FireBaseBucket(), context.FireBaseUser(), context.FireBasePassword(), path, userUpdate.userPhoto);
+            
+            var query = "sp_userInfo_Photo_Update";
 
             var parameters = new DynamicParameters();
             parameters.Add("@userId", userUpdate.userId, DbType.String);

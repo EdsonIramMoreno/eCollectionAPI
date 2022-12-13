@@ -6,7 +6,7 @@ namespace Core.Interfaces.Collection
 {
     public interface ICollectionServices
     {
-        public Task<ResponseDTO> CreateCollection(CollectionInfoInsertDTO collectionInfo);
+        public Task<int> CreateCollection(CollectionInfoInsertDTO collectionInfo);
         public Task<List<CollectionInfoDisplayDTO>> getCollectionInfoDisplay(string fk_userId);
         public Task<CollectionInfoDTO> getCollectionById(int collectionId);
         public Task<ResponseDTO> CollectionInfoUpdate(CollectionInfoUpdateDTO collection);

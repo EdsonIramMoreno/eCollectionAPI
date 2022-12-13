@@ -34,7 +34,7 @@ namespace Infrastructure.Repositories.Collection
             await connection.QueryAsync(query, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task CreateCollection(CollectionInfoInsertDTO collectionInfo)
+        public async Task<int> CreateCollection(CollectionInfoInsertDTO collectionInfo)
         {
             var query = "sp_collectionInfo_Insert";
 
@@ -51,6 +51,8 @@ namespace Infrastructure.Repositories.Collection
                     collectionCover = collectionInfo.collectionCover,
                     collectionName = collectionInfo.collectionName}
             );
+
+            return collectionId;
         }
 
         public async Task DeleteCollection(int collectionId)

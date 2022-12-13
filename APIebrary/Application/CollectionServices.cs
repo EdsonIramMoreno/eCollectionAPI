@@ -50,31 +50,19 @@ namespace API.Application
             }
         }
 
-        public async Task<ResponseDTO> CreateCollection(CollectionInfoInsertDTO collectionInfo)
+        public async Task<int> CreateCollection(CollectionInfoInsertDTO collectionInfo)
         {
             try
             {
                 // 1.0 Obtener información del Usuario
-                await collectionRepository.CreateCollection(collectionInfo);
+                var id = await collectionRepository.CreateCollection(collectionInfo);
 
                 // 2.0 Retornar Listado
-                return new ResponseDTO
-                {
-                    status = 200,
-                    response = "The collection has been created succesfully",
-                    errors = null,
-                    entityName = "CollectionInfo"
-                };
+                return id;
             }
             catch (Exception ex)
             {
-                return new ResponseDTO
-                {
-                    status = 500,
-                    response = "One or more mistakes where found in the consult",
-                    errors = new List<ErrorDTO> { new ErrorDTO { message = ex.Message, stackTrace = ex.StackTrace } },
-                    entityName = "CollectionInfo"
-                };
+                return 0;
             }
         }
 

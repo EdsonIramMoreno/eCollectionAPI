@@ -51,10 +51,10 @@ namespace API.Controllers
             return StatusCode(200, response);
         }
 
-        [HttpGet("{collectionId:int}/{itemId:int}")]
-        public async Task<ActionResult> getAllItemsByCollectionId(int collectionId, int itemId)
+        [HttpGet("getItemById/{itemId:int}")]
+        public async Task<ActionResult> getItemById(int itemId)
         {
-            var response = await services.getItemById(collectionId, itemId);
+            var response = await services.getItemById(itemId);
             
             if (response == null)
             {
@@ -67,7 +67,7 @@ namespace API.Controllers
             return StatusCode(200, response);
         }
 
-        [HttpDelete("delete/{itemId:int}")]
+        [HttpPost("delete/{itemId:int}")]
         public async Task<ActionResult<ResponseDTO>> DeletePhoto(int itemId)
         {
             ResponseDTO response = await services.DeleteItem(itemId);

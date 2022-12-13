@@ -44,18 +44,32 @@ namespace Infrastructure.Repositories.Item
             });
         }
 
-        public async Task<itemCompleteInfoDTO> getItemById(int collectionId, int itemId)
+        public async Task<itemCompleteInfoDTO> getItemById(int itemId)
         {
             var query = "sp_itemInfo_get";
 
             var parameters = new DynamicParameters();
-            parameters.Add("@collectionId", collectionId, DbType.Int32);
             parameters.Add("@itemId", itemId, DbType.Int32);
 
             using var connection = context.SQLConnection();
             var itemComplete = (await connection.QuerySingleOrDefaultAsync<itemCompleteInfoDTO>(query, parameters, commandType: CommandType.StoredProcedure));
 
+            itemComplete.itemPhotos = await getAllItemPhotos(itemId);
+
             return itemComplete;
+        }
+
+        public async Task<List<string>> getAllItemPhotos(int itemId)
+        {
+            var query = "sp_itemPhoto_get";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@itemId", itemId, DbType.Int32);
+
+            using var connection = context.SQLConnection();
+            List<string> photos = (await connection.QueryAsync<string>(query, parameters, commandType: CommandType.StoredProcedure)).ToList();
+
+            return photos;
         }
 
         public async Task<List<itemDisplayInfoDTO>> getAllItemsByCollectionId(int collectionId)

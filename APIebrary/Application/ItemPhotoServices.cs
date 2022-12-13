@@ -45,31 +45,6 @@ namespace API.Application
             }
         }
 
-        public async Task<List<ItemPhotoDisplayDTO>> getAllItemPhotos(int itemId)
-        {
-            try
-            {
-                // 1 Get CategoryModList
-                var photoMods = await photoRepository.getAllItemPhotos(itemId);
-
-                List<ItemPhotoDisplayDTO> photos = new List<ItemPhotoDisplayDTO>();
-
-                // 2 Map MOD to DTO
-                foreach (var photo in photoMods)
-                {
-                    photos.Add(ItemPhotoMapper.mapMODtoDTO(photo));
-                }
-
-
-                // 3 Return "returnCategoryDTO"
-                return photos;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Exception: " + ex.Message + " " + ex.StackTrace);
-            }
-        }
-
         public async Task<ItemPhotoDisplayDTO> getItemPhotosById(int itemId, int photoId)
         {
             try
