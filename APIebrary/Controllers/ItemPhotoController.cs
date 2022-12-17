@@ -21,11 +21,11 @@ namespace API.Controllers
 
 
         [HttpPost("insert")]
-        public async Task<ActionResult<ResponseDTO>> InsertPhoto(ItemPhotoInsertDTO itemPhoto)
+        public async Task<ActionResult> InsertPhoto(ItemPhotoInsertDTO itemPhoto)
         {
-            ResponseDTO response = await services.InsertPhoto(itemPhoto);
+            var response = await services.InsertPhoto(itemPhoto);
 
-            return StatusCode(response.status, response);
+            return StatusCode(response, response);
         }
 
         [HttpGet("{itemId:int}/{photoId:int}")]

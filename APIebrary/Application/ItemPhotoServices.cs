@@ -66,7 +66,7 @@ namespace API.Application
             }
         }
 
-        public async Task<ResponseDTO> InsertPhoto(ItemPhotoInsertDTO itemPhoto)
+        public async Task<int> InsertPhoto(ItemPhotoInsertDTO itemPhoto)
         {
             try
             {
@@ -74,23 +74,11 @@ namespace API.Application
                 await photoRepository.InsertPhoto(itemPhoto);
 
                 // 2.0 Retornar Listado
-                return new ResponseDTO
-                {
-                    status = 200,
-                    response = "The item photo has been created succesfully",
-                    errors = null,
-                    entityName = "ItemPhoto"
-                };
+                return 200;
             }
             catch (Exception ex)
             {
-                return new ResponseDTO
-                {
-                    status = 500,
-                    response = "One or more mistakes where found in the consult",
-                    errors = new List<ErrorDTO> { new ErrorDTO { message = ex.Message, stackTrace = ex.StackTrace } },
-                    entityName = "ItemPhoto"
-                };
+                return 500;
             }
         }
     }

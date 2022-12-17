@@ -19,11 +19,17 @@ namespace API.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult<ResponseDTO>> CreateItem(itemInsertInfoDTO itemInsertInfo)
+        public async Task<ActionResult> CreateItem(itemInsertInfoDTO itemInsertInfo)
         {
-            ResponseDTO response = await services.CreateItem(itemInsertInfo);
+            var response = await services.CreateItem(itemInsertInfo);
 
-            return StatusCode(response.status, response);
+            if(response == 0)
+            {
+
+            return StatusCode(404, response);
+            }
+
+            return Ok(response);
         }
 
         [HttpPut("update")]
@@ -68,11 +74,11 @@ namespace API.Controllers
         }
 
         [HttpPost("delete/{itemId:int}")]
-        public async Task<ActionResult<ResponseDTO>> DeletePhoto(int itemId)
+        public async Task<ActionResult> DeleteItem(int itemId)
         {
             ResponseDTO response = await services.DeleteItem(itemId);
 
-            return StatusCode(response.status, response);
+            return StatusCode(response.status, response.status);
         }
     }
 }

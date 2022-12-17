@@ -74,7 +74,7 @@ namespace API.Controllers
         {
             ResponseDTO response = await services.DeleteCollection(collectionId);
 
-            return StatusCode(response.status, response);
+            return StatusCode(response.status, response.status);
         }
     }
 }

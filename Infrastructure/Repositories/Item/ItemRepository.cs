@@ -18,7 +18,7 @@ namespace Infrastructure.Repositories.Item
             this.context = context;
         }
 
-        public async Task CreateItem(itemInsertInfoDTO itemInfo)
+        public async Task<int> CreateItem(itemInsertInfoDTO itemInfo)
         {
             var query = "sp_itemInfo_Insert";
 
@@ -42,6 +42,8 @@ namespace Infrastructure.Repositories.Item
                 marketPrice = itemInfo.marketPrice,
                 acquiredPrice = itemInfo.acquiredPrice
             });
+
+            return itemId;
         }
 
         public async Task<itemCompleteInfoDTO> getItemById(int itemId)
@@ -74,7 +76,7 @@ namespace Infrastructure.Repositories.Item
 
         public async Task<List<itemDisplayInfoDTO>> getAllItemsByCollectionId(int collectionId)
         {
-            var query = "sp_itemInfo_get";
+            var query = "sp_itemInfo_Display_get";
 
             var parameters = new DynamicParameters();
             parameters.Add("@collectionId", collectionId, DbType.Int32);
