@@ -18,40 +18,28 @@ namespace API.Application
             this.itemRepository = itemRepository;
         }
 
-        public async Task<ResponseDTO> CreateItem(itemInsertInfoDTO itemInfo)
+        public async Task<int> CreateItem(itemInsertInfoDTO itemInfo)
         {
             try
             {
                 // 1.0 Obtener información del Usuario
-                await itemRepository.CreateItem(itemInfo);
+                var itemId = await itemRepository.CreateItem(itemInfo);
 
                 // 2.0 Retornar Listado
-                return new ResponseDTO
-                {
-                    status = 200,
-                    response = "The item has been created succesfully",
-                    errors = null,
-                    entityName = "ItemInfo"
-                };
+                return itemId;
             }
             catch (Exception ex)
             {
-                return new ResponseDTO
-                {
-                    status = 500,
-                    response = "One or more mistakes where found in the consult",
-                    errors = new List<ErrorDTO> { new ErrorDTO { message = ex.Message, stackTrace = ex.StackTrace } },
-                    entityName = "ItemInfo"
-                };
+                return 0;
             }
         }
 
-        public async Task<itemCompleteInfoDTO> getItemById(int collectionId, int itemId)
+        public async Task<itemCompleteInfoDTO> getItemById(int itemId)
         {
             try
             {
                 // 1 Get CategoryModList
-                var itemDisplay = await itemRepository.getItemById(collectionId, itemId);
+                var itemDisplay = await itemRepository.getItemById(itemId);
 
                 // 2 Retornar Listado
                 return itemDisplay;

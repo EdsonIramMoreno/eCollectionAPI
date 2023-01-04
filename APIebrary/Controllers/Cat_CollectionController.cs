@@ -17,11 +17,11 @@ namespace API.Controllers
         }
 
         [HttpPost("insert")]
-        public async Task<ActionResult<ResponseDTO>> InsertRel(rel_Cat_Collection_DTO rel_Cat)
+        public async Task<ActionResult> InsertRel(rel_Cat_Collection_DTO rel_Cat)
         {
             ResponseDTO response = await services.insertRel(rel_Cat);
 
-            return StatusCode(response.status, response);
+            return StatusCode(response.status);
         }
     }
 }

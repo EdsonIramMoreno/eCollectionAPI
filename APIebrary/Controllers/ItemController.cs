@@ -19,11 +19,17 @@ namespace API.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult<ResponseDTO>> CreateItem(itemInsertInfoDTO itemInsertInfo)
+        public async Task<ActionResult> CreateItem(itemInsertInfoDTO itemInsertInfo)
         {
-            ResponseDTO response = await services.CreateItem(itemInsertInfo);
+            var response = await services.CreateItem(itemInsertInfo);
 
-            return StatusCode(response.status, response);
+            if(response == 0)
+            {
+
+            return StatusCode(404, response);
+            }
+
+            return Ok(response);
         }
 
         [HttpPut("update")]
@@ -51,10 +57,10 @@ namespace API.Controllers
             return StatusCode(200, response);
         }
 
-        [HttpGet("{collectionId:int}/{itemId:int}")]
-        public async Task<ActionResult> getAllItemsByCollectionId(int collectionId, int itemId)
+        [HttpGet("getItemById/{itemId:int}")]
+        public async Task<ActionResult> getItemById(int itemId)
         {
-            var response = await services.getItemById(collectionId, itemId);
+            var response = await services.getItemById(itemId);
             
             if (response == null)
             {
@@ -67,12 +73,12 @@ namespace API.Controllers
             return StatusCode(200, response);
         }
 
-        [HttpDelete("delete/{itemId:int}")]
-        public async Task<ActionResult<ResponseDTO>> DeletePhoto(int itemId)
+        [HttpPost("delete/{itemId:int}")]
+        public async Task<ActionResult> DeleteItem(int itemId)
         {
             ResponseDTO response = await services.DeleteItem(itemId);
 
-            return StatusCode(response.status, response);
+            return StatusCode(response.status, response.status);
         }
     }
 }
